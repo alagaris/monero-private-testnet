@@ -1,0 +1,110 @@
+@wallet1 = http://localhost:18081
+@wallet2 = http://localhost:18082
+@wallet3 = http://localhost:18083
+
+@node1 = http://localhost:28081
+
+###
+
+POST {{wallet1}}/json_rpc
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "start_mining",
+    "params": {
+        "threads_count": 1
+    }
+}
+}
+
+###
+
+POST {{wallet1}}/json_rpc
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "stop_mining"
+}
+
+###
+
+POST {{wallet1}}/json_rpc
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "get_address"
+}
+
+###
+
+POST {{wallet2}}/json_rpc
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "create_address",
+    "params": {"account_index": 0}
+}
+
+###
+
+POST {{wallet3}}/json_rpc
+Content-Type: application/json
+
+{"jsonrpc":"2.0","id":"0","method":"get_height"}
+
+###
+
+POST {{wallet1}}/json_rpc
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "transfer",
+    "params": {
+        "destinations": [{
+            "amount": 1000000000000,
+            "address": "A1wwHv2sScyAnR4PFuzmj2cgjSYziqxtEfd78BAxkjUFhZSxS39bTh1YfmK1g287Ta5iVpN2daT5iiRB6sqUbCqv5FBWFDZ"
+        },{
+            "amount": 1000000000000,
+            "address": "9xgcCBjmPLvK49CRfJQk46DbHJGSErHJBAJ9dT9nV3FxGVgo5oyRpHiRsJEMq6a1UVfXTpQEhfj3nYJH7gxo15b9Q4u6NjW"
+        }],
+        "do_not_relay": false
+    }
+}
+
+###
+
+POST {{wallet1}}/json_rpc
+Content-Type: application/json
+
+{
+    "jsonrpc": "2.0",
+    "id": "0",
+    "method": "get_transfers",
+    "params": {
+        "in": true
+    }
+}
+
+
+###
+POST {{wallet1}}/json_rpc
+Content-Type: application/json
+
+{"jsonrpc":"2.0","id":"0","method":"get_balance"}
+
+###
+POST {{node1}}/json_rpc
+Content-Type: application/json
+
+{"jsonrpc":"2.0","id":"0","method":"get_last_block_header"}
+
